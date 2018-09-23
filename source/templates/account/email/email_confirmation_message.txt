@@ -1,0 +1,12 @@
+{% load account %}
+{% user_display user as user_display %}
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Saudações!
+
+Você está recebendo esta mensagem porque o usuário {{ user_display}} do site {{ site_domain }} forneceu este endereço de e-mail ao cadastrar-se no nosso site.
+
+Para confirmar está ação clique no link: {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}{{ site_name }} agradece!
+{{ site_domain }}{% endblocktrans %}

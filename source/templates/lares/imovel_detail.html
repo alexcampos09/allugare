@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+
+{% block CSS_File %}
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+{% endblock %}
+
+{% block style %}
+<style>
+/*Images*/
+
+#carousel{
+    height:500px;
+    margin-bottom:20px;
+}
+
+#carousel .item{
+    height: 500px;
+    margin-bottom:20px;
+}
+
+#carousel img{
+    height:500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}
+
+/*Image controls*/
+.carousel-control.left, .carousel-control.right {
+    background: none !important;
+    filter: progid: none !important;
+    outline: 0;
+}
+.carousel .carousel-control {
+    visibility: hidden;
+}
+.carousel:hover .carousel-control {
+    visibility: visible;
+}
+
+/*Main Page*/
+.righty{
+    margin-top: 20px;
+}
+
+#map {
+    margin-top: 20px;
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 0px;
+    height: 0;
+    margin-top: 0px;
+}
+
+.wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    font-family: 'Cuprum', sans-serif;
+}
+
+.info i{
+    color: green;
+}
+
+.btn i{
+    color: white;
+}
+
+.fa-bed{
+    margin-top: 10px;
+}
+
+.basic-info li{
+
+}
+
+.profile img{
+    height: 160px;
+    border-radius: 20px;
+}
+
+.basic-info{
+    margin-top: 50px;
+}
+
+.images img{
+    width:800px;
+    border-radius:20px;
+    margin-bottom: 20px;
+}
+
+.basic-info li, .expenses li, .localization li, .description li{
+    display: inline;
+    padding: 10px;
+}
+
+#description{
+    font-size: 1.5em;
+    font-family: Catamaran;
+}
+
+.righty h2{
+    margin-bottom: 30px;
+}
+
+.site-buttons{
+    margin-top: 20px;
+}
+
+.elif-images{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1em;
+}
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+{% if object.imovelphotos_set.count > 0 %}
+
+<div class="row" id="top">
+    <div class="col-sm-12 col-xs-12">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% if object.imovelphotos_set.count >= 2 %}
+                    {% for img in object.imovelphotos_set.all %}
+                        <li data-target="#carousel-example-generic" data-slide-to="{{ img.count }}" class="img-responsive {% if forloop.first %} active {% endif %}"></li>
+                    {% endfor %}
+                {% endif %}
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+
+                {% for img in object.imovelphotos_set.all %}
+                    <div class="item {% if forloop.first %} active {% endif %}">
+                          <img src="{{ img.photos.url }}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Controls -->
+            {% if object.imovelphotos_set.count >= 2 %}
+                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %}
+        </div>
+            {% elif object.user == user %}
+            <h1><a href="{{ imovel.get_absolute_url }}photos" class="btn btn-success add-photos elif-images">Adicionar Imagens</a></h1>
+            {% endif %}
+    </div>
+</div>
+
+
+
+
+ <div class="container info">
+    <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7 lefty">
+            <div class="description">
+                <div class="col-lg-12 basic-info">
+                    <h1><i class="fa fa-book" aria-hidden="true"></i> Descrição</h1>
+                    <ul>
+                        <h3>
+                            <li><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{ object.bairro }}</li>
+                            <li>
+                                {% if object.tipo_imovel == 'Casa' %}
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                {% endif %} {{ object.tipo_imovel }}
+                            </li>
+                            <br>
+                            <li><i class="fa fa-bed" aria-hidden="true"></i> {{ object.qtd_quartos }} Quarto(s)</li>
+                            {% if object.mobiliado %}
+                                <li>Mobiliado</li>
+                            {% else %}
+                                <li>Não Mobiliado</li>
+                            {% endif %}
+                        </h3>
+                    </ul>
+                    <ul>
+                        <h5>
+                            <li class="lead">{{ object.cidade }}, {{ object.uf }}</li><br>
+                            <li class="lead">Vago: {{ object.move_in_date }}</li>
+                        </h5>
+                    </ul>
+                </div>
+                <ul>
+                    <h3>
+                        <li>{% if object.area_util %} Área Útil: <strong>{{ object.area_util }}m²</strong>{% endif %}</li>
+                        <li><i class="fa fa-bath" aria-hidden="true"></i> Banheiros: <strong>{{ object.qtd_banheiros }}</strong></li>
+                        <li><i class="fa fa-car" aria-hidden="true"></i> Vagas: <strong>{{ object.qtd_vagas }}</strong></li>
+                    </h3>
+                    <p class="lead" id="description"> {{ object.descricao|linebreaksbr }}</p>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="localization">
+                <h1><i class="fa fa-globe" aria-hidden="true"></i> Localização</h1>
+                <ul>
+                    <h4>
+                        <li>Rua {{ object.rua }}</li><br>
+                        <li>{{ object.bairro }}</li><br>
+                        <li>{{ object.cidade }}, {{ object.uf }}</li>
+                    </h4>
+                </ul>
+                {% if object.referencia %}<h3>Referência: {{ object.referencia }}</h3>{% endif %}
+            </div>
+            <hr>
+
+            <div class="expenses">
+                <h1><i class="fa fa-money" aria-hidden="true"></i> Custos</h1>
+                <ul>
+                    <h4>
+                        <li>Aluguel: R$ {{ object.preco_locacao }}</li><br>
+                        {% if object.preco_condominio %}<li>Condomínio: R$ {{ object.preco_condominio }}</li><br>{% endif %}
+                        {% if object.iptu %}<li>IPTU: R$ {{ object.iptu }}</li><br>{% endif %}
+                        {% if object.conta_agua %}<li>Água: R$ {{ object.conta_agua }}</li><br>{% endif %}
+                        {% if object.conta_luz %}<li>Luz: R$ {{ object.conta_luz }}</li><br>{% endif %}
+                    </h4>
+                </ul>
+                <h3>Total mensal: R$ {{ object.preco_total }}</h3>
+            </div>
+        </div>
+
+        <!-- PRICE BOX -->
+        <div class="col-lg-5 col-md-5 col-sm-5 righty">
+            <h2>Locação: R$ {{ object.preco_total }}</h2>
+
+            {% if object.video %}
+                <h2><i class="fa fa-video-camera" aria-hidden="true"></i> Filmagem</h2>
+                <div id="video" class="wrapper">
+                    <iframe width="460" height="260" src="{{ object.video }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+
+            <div id="map"></div>
+
+            <div class="site-buttons">
+                {% if object.user == user %}
+                    <a href="{{ imovel.get_absolute_url }}photos" class="btn btn-success add-photos">Fotos</a>
+                    <a href="{{ imovel.get_absolute_url }}update" class="btn btn-primary">Editar</a>
+                    <a href="{{ imovel.get_absolute_url }}delete" class="btn btn-danger">Deletar</a>
+                {% else %}
+                    <a href="/profiles/{{ object.user }}/" class="btn btn-success">Ver Perfil</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+    function initMap() {
+        var address = {lat: {{latitude}}, lng:{{longitude}} };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: address
+        });
+        var marker = new google.maps.Marker({
+          position: address,
+          map: map
+        });
+    }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiw0iU0egdeVrOKboOOZ2n1WXS3Os0WgI&callback=initMap"></script>
+{% endblock %}

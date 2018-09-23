@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Allugare | Blog {% endblock %}
+
+{% block style %}
+<style>
+
+.texto{
+    width:70%;
+}
+
+.texto h1{
+    text-align: center;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container texto">
+    {% block blog %}
+
+    {% endblock %}
+</div>
+
+{% endblock %}

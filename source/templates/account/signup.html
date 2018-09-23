@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load account socialaccount %}
+
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+    {% load socialaccount %}
+    {% providers_media_js %}
+    <h1>Cadastre-se agora!</h1>
+
+
+    <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="btn btn-primary">Criar conta com Facebook</a>
+    <br><br>
+
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+    <br>
+    <p class="lead">Já possui uma conta? Faça <a href="{{ login_url }}">Login</a>.</p>
+{% endblock %}

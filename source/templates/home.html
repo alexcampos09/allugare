@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} Allugare {% endblock %}
+{% block CSS_File %} <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700i" rel="stylesheet"> {% endblock %}
+
+{% block style %}
+<style>
+
+/*SECTION ONE*/
+#top {
+    background: url("{% static 'img/skyscraper.jpg' %}") no-repeat center center fixed;
+    background-attachment: scroll;
+    background-size: cover;
+    min-height: 700px;
+}
+
+.jumbotron{
+    background-color: rgba(255, 255, 255, 0);
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.jumbotron li{
+    display: block;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(55, 55, 55, 0.7);
+}
+
+.jumbotron a{
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.jumbotron h1{
+    color:white;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.heather-options{
+    font-size: 18px;
+    margin: 10px;
+}
+
+@media (min-width:990px){
+    .jumbotron li{
+        width: 60%;
+        margin: 10px auto;
+    }
+}
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+<section id="top">
+    <div class="container">
+        <div class="jumbotron text-align-center">
+            <h1>Eu quero:</h1>
+            <div class="heather-options">
+                <ul>
+                    <a href="{% url 'imovel_list' %}">
+                        <li><h2>Procurar imóveis para alugar</h2></li>
+                    </a>
+                    <a href="{% url 'imovel_create' %}">
+                        <li><h2>Anunciar meu imóvel</h2></li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

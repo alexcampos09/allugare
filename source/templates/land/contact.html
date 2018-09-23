@@ -1,0 +1,196 @@
+{% extends 'land/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block style %}
+<style>
+
+body{
+    margin: 0;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.jumbotron{
+    /*background-color: rgb(12, 75, 51, 0.85);*/
+    background-color: #306551;
+    color:white;
+    height:220px;
+    margin-top: 0;
+    padding: 20px;
+}
+
+.jumbotron img{
+    height: 220px;
+    margin-top: -20px;
+    margin-left: 0px;
+}
+
+.icons{
+    margin-bottom: 40px;
+}
+
+.icons p{
+    padding-top: 20px;
+}
+
+.icons img{
+    border-radius: 10px;
+    height: 200px;
+}
+
+.depoimento img{
+    height: 100px;
+    width: 75px;
+    z-index: 0;
+}
+
+.depoimento .texto{
+    z-index: 10;
+    padding-top: 15px;
+}
+
+.form .btn{
+    background-color: rgb(170, 64, 3);
+    border-color: rgb(170, 64, 3);
+    font-size: 1.5em;
+}
+
+@media (min-width: 1200px) {
+    .depoimento .texto{
+        margin-left: -20px;
+    }
+
+    .form hr{
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 771px) {
+    .jumbotron{
+        height:340px;
+    }
+
+    .jumbotron img{
+        height: 340px;
+    }
+
+    .form hr{
+        display: none;
+    }
+
+    .form .btn{
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 770px) and (min-width: 496px) {
+    .jumbotron{
+        height:200px;
+    }
+
+    .jumbotron img{
+        display: none;
+    }
+
+    .form{
+        padding-bottom: 40px;
+        background-color: #6D9384;
+    }
+
+    .icons img{
+        margin: 0 auto;
+        width: 60%;
+    }
+
+    .depoimento .texto{
+        margin-left: -40px;
+    }
+}
+
+@media (max-width: 495px) {
+    .jumbotron{
+        height:320px;
+    }
+
+    .jumbotron img{
+        display: none;
+    }
+
+    .form{
+        padding-bottom: 40px;
+        background-color: rgb(12, 75, 51, 0.6);
+    }
+
+    .icons img{
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
+</style>
+{% endblock %}
+
+
+
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+            <!-- Main component for a primary marketing message or call to action -->
+
+                <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
+                    <h1>Imóveis para Estudantes</h1>
+                    <p>Diga-nos o que procura e dentro de dois dias úteis entraremos em contato com sugestões dos imóveis que mais se enquadram no seu perfil.</p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                    <img src="{% static 'img/mesa_cadeiras.jpeg' %}" alt="Mesa e Cadeiras" class="img-responsive">
+                    <!-- <iframe width="560" height="215" src="https://www.youtube.com/embed/eUdM9vrCbow" frameborder="0" allowfullscreen></iframe> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="row icons">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <p class="lead text-align-center"><strong>Direto com o Dono<strong></p>
+                    <img src="{% static 'img/key-wood.jpg' %}" alt="Chave" class="img-responsive">
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <p class="lead text-align-center"><strong>Menos Burocracia<strong></p>
+                    <img src="{% static 'img/notebook.jpeg' %}" alt="Chave" class="img-responsive">
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <p class="lead text-align-center"><strong>Simples e Rápido<strong></p>
+                    <img src="{% static 'img/two-guys-sunset.jpg' %}" alt="Chave" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row depoimento">
+                <div class="col-md-2 col-sm-3 col-xs-3">
+                    <img src="{% static 'img/ju.png' %}" alt="Depoimento Júlia" class="img-responsive img-circle">
+                    <h4>Júlia Savietto</h4>
+                </div>
+                <div class="col-md-8 col-sm-9 col-xs-9">
+                    <p class="lead texto">Tive sorte de alugar um apê direto com o proprietário, foi tranquilo. Fizemos um contrato simples e eu transferia diretamente o aluguel para a conta dele. Passei 4 anos lá e nunca tive problemas. Recomendo!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12 pull-right form">
+            <hr>
+                <p class="lead text-align-center">{{ title }}</h1>
+                <form action="" method="POST">{% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Receber imóveis selecionados" class="btn btn-success btn-block">
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

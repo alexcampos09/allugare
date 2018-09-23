@@ -1,0 +1,118 @@
+body {
+    font-family: Catamaran;
+    margin-top: 50px;
+    min-height: 600px;
+}
+
+html {
+    height: 100%;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+
+.navbar-default{
+    background-color: f8f8fa;
+}
+
+.center {
+    text-align: center;
+    padding-top: 15%;
+    color: white;
+}
+
+#login {
+    min-width: 210px;
+    background-color: rgb(255, 255, 255);
+    padding: 14px 14px 0;
+}
+
+#login .social-buttons {
+    margin: 12px 0;
+}
+
+#login-form{
+    padding-bottom: 10px;
+    margin: 0 auto;
+}
+
+#login-form input{
+    width: 150px;
+}
+
+.btn-fb {
+    color: white;
+    background: #3b5998;
+}
+
+.btn-tw {
+    color: white;
+    background: #55acee;
+}
+
+footer {
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    padding: 25px 0;
+}
+
+
+/*FrontEnd Bootcamp*/
+
+a {
+    color: #f63;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+footer span.copyright {
+    line-height: 40px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    text-transform: none;
+}
+
+footer ul.quicklinks {
+    margin-bottom: 0;
+    line-height: 40px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    text-transform: none;
+    text-decoration: none;
+}
+
+footer #move-top a{
+    color:#f63;
+    font-family: Catamaran;
+}
+
+
+ul.social-buttons {
+    margin-bottom: 0;
+}
+
+ul.social-buttons li a {
+    display: block;
+    background-color: #222222;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    color: white;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
+    /*background-color: #fed136;*/
+    background-color: #f63;
+}

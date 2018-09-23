@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+<style>
+h1{
+    margin-top: 40px;
+}
+
+p{
+    text-align: justify;
+}
+
+img{
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    margin: 10px;
+
+}
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h1>A allugare.com</h1>
+            <p class="lead">A allugare.com surgiu com um grupo de recém formados de diferentes cursos e faculdades com a ambição de melhorar a vida dos estudantes na procura por lugar para morar. Essa ideia surgiu justamente porque nós mesmos já estivemos nessa situação e muitos de nós sentimos dificuldade nessa missão.
+            <br><br>
+            Atualmente é possível fazer quase tudo pelo smarthphone e no conforto de casa, incluindo coisas importantes (como serviços bancários), mas o processo de alugar uma casa, apê ou república não parece ter passado pela mesma revolução tecnológica aqui no Brasil, não é mesmo?
+            <br><br>
+            Estamos começando, e mesmo enfrentando muitas dificuldades como jovem startup, já estamos tendo um gostinho do potencial desse sonho! A ideia de uma locação simplificada focada em estudantes, inspirada em iniciativas fora do Brasil, nos anima e nos motiva para continuarmos nesse caminho pouco desbravado.
+            <br><br>
+            Justamente por estarmos no começo, qualquer sugestão ou crítica será muito bem recebida e estudada. Queremos oferecer um serviço informativo e simples, e dessa forma, crescer como empresa por verdadeiramente ajudar esses jovens estudantes que estão indo atrás de um lugarzinho legal para morar perto de suas universidades.
+            <br><br>
+            Precisa de ajuda? Quer dar alguma sugestão/crítica? Gostaria de trabalhar conosco? Entre em contato!
+            <br>
+            Obrigad@ pela atenção e até mais!</p>
+        </div>
+        <div class="col-md-3">
+            <!-- <img src="{% static 'img/ju.jpeg' %}" alt="Júlia" class="img-responsive"> -->
+            <!-- <img src="{% static 'img/alex_vertical.png' %}" alt="Alex" class="img-responsive"> -->
+        </div>
+    </div>
+</div>
+{% endblock %}

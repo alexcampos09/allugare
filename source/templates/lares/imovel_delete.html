@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<div class="container">
+
+{% if object.user == user %}
+    <h1>Você tem certeza de que deseja deletar esta mensagem?</h1>
+
+    <form method="POST" action="."> {% csrf_token %}
+        <p class="lead">Esta ação não poderá ser desfeita.</p>
+        <!-- <a href="/lares/{{ object.id }}" class="lead btn btn-primary"> Cancelar</a> -->
+        <a href="{{ imovel.get_absolute_url }}" class="lead btn btn-primary"> Cancelar</a>
+        <input type="submit" value="Deletar Imóvel" class="btn btn-danger">
+    </form>
+{% else %}
+    <h1>Somente os donos dos anúncios podem deletá-los.</h1>
+{% endif %}
+
+</div>
+{% endblock %}
