@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head_title %} Allugare | Ofertas {% endblock %}
+
+{% block CSS_File %}
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+{% endblock %}
+
+{% block style %}
+<style>
+
+h1{
+    margin-top: 50px;
+}
+.table{
+    font-family: 'Cuprum', sans-serif;
+    font-size: 1.2em;
+    text-align: left;
+    margin-top: 10px;
+}
+.table img{
+    height: 200px;
+}
+td{
+    width: 50%;
+}
+td a{
+    color: black;
+}
+tr{
+    border: solid 2px;
+}
+img{
+    border-radius: 20px;
+}
+
+.big-icon {
+    font-size: 200px;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container" id="top">
+    <h1>Ofertas de Imóveis</h1>
+    <a href="{% url 'imovel_create' %}" class="btn btn-primary">Anuncie seu imóvel!</a>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" id="tabela1">
+                    {% for imovel in object_list %}
+                        {% if forloop.counter|add:-1|divisibleby:"2" %}
+                            <tr>
+                                <td><a href="{{ imovel.get_absolute_url }}">
+                                    {% if imovel.qtd_quartos > 1 %}
+                                        <h3>{{ imovel.tipo_imovel }} de {{ imovel.qtd_quartos }} quartos <br><br>
+                                    {% else %}
+                                        <h3>{{ imovel.tipo_imovel }} de {{ imovel.qtd_quartos }} quarto <br><br>
+                                    {% endif %}
+                                    R$ {{ imovel.preco_total }},00 mensais <br><br>
+                                    {{ imovel.bairro }}, {{ imovel.cidade }}.<br></h3>
+
+                                    <h4>Disponível: {{ imovel.move_in_date }}</h4></a></td>
+                                {% if imovel.imovelphotos_set.count > 0 %}
+                                    {% with imovel.imovelphotos_set.first as image %}<td><a href="{{ imovel.get_absolute_url }}"><img src="{{ image.photos.url }}" alt="Foto" class="img-responsive"></a></td>{% endwith %}
+                                {% elif imovel.tipo_imovel == "Apartamento" %}
+                                    <td><a href="{{ imovel.get_absolute_url }}"><i class="fa fa-building big-icon" aria-hidden="true"></i></a></td>
+                                {% else %}
+                                    <td><a href="{{ imovel.get_absolute_url }}"><img src="{% static 'img/house.png' %}" alt="Sem Foto"></a></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <table class="table table-hover" id="tabela2">
+                    {% for imovel in object_list %}
+                        {% if forloop.counter|divisibleby:"2" %}
+                            <tr>
+                                <td><a href="{{ imovel.get_absolute_url }}">
+                                    {% if imovel.qtd_quartos > 1 %}
+                                        <h3>{{ imovel.tipo_imovel }} de {{ imovel.qtd_quartos }} quartos <br><br>
+                                    {% else %}
+                                        <h3>{{ imovel.tipo_imovel }} de {{ imovel.qtd_quartos }} quarto <br><br>
+                                    {% endif %}
+                                    R$ {{ imovel.preco_total }},00 mensais <br><br>
+                                    {{ imovel.bairro }}, {{ imovel.cidade }}.<br></h3>
+
+                                    <h4>Disponível: {{ imovel.move_in_date }}</h4></a></td>
+                                {% if imovel.imovelphotos_set.count > 0 %}
+                                    {% with imovel.imovelphotos_set.first as image %}<td><a href="{{ imovel.get_absolute_url }}"><img src="{{ image.photos.url }}" alt="Foto" class="img-responsive"></a></td>{% endwith %}
+                                {% elif imovel.tipo_imovel == "Apartamento" %}
+                                    <td><a href="{{ imovel.get_absolute_url }}"><i class="fa fa-building big-icon" aria-hidden="true"></i></a></td>
+                                {% else %}
+                                    <td><a href="{{ imovel.get_absolute_url }}"><img src="{% static 'img/house.png' %}" alt="Sem Foto"></a></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+
+
+            {% if is_paginated %}
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+            {% else %}
+                <!-- <h3>Your File Exam</h3>
+                <p>File not yet available</p> -->
+            {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}

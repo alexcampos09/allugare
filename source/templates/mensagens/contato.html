@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block style %}
+<style>
+
+.middle{
+    height: 30px;
+}
+
+body{
+    margin: 20px;
+}
+
+#formulario{
+    min-height: 500px;
+}
+
+img{
+    height:400px;
+    border-radius: 50px;
+    margin: 20px;
+}
+
+.righty{
+    margin-top: -50px;
+}
+
+.righty h3{
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+
+    .righty{
+        margin-top: 20px;
+    }
+    .righty img{
+        display: none;
+    }
+}
+/*END MEDIA*/
+
+</style>
+{% endblock %}
+
+{% block body %}
+<section class="middle" id="top">
+</section>
+
+<div class="container" id="formulario">
+    <div class="row">
+        <h1 class="text-align-center">{{ title }}</h1>
+        <p class="lead">11-94554-3607 (Claro)</p>
+        <p class="lead">11-95967-1972 (Tim)</p>
+        <div class="col-sm-6 col-xs-12">
+            <form action="" method="POST">{% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Enviar" class="btn btn-primary">
+            </form>
+        </div>
+        <dic class="col-sm-6 col-xs-12 righty">
+            <h3>Tire dúvidas ou agende uma visita fotográfica</h3>
+            <img src="{% static 'img/key-metal.jpeg' %}" alt="chaves" class="img-responsive">
+        </dic>
+    </div>
+</div>
+
+{% endblock %}

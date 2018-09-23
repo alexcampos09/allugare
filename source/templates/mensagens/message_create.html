@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block style %}
+<style>
+
+.middle{
+    height: 20px;
+}
+
+#formulario{
+    min-height: 500px;
+}
+
+#description{
+    text-align: justify;
+    margin-top: 20px;
+}
+
+#description img{
+    height: 300px;
+    border-radius: 20px;
+}
+
+@media (max-width: 500px) {
+    #description img{
+        height: 250px;
+        border-radius: 20px;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<section class="middle" id="top">
+</section>
+
+
+<div class="container" id="formulario">
+    <div class="row">
+        <div class="col-sm-7">
+            <h1 class="text-align-center">{{ form_message }}</h1>
+            <form action="" method="POST">{% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Enviar" class="btn btn-primary"/>
+            </form>
+        </div>
+        <div class="col-sm-5" id="description">
+            <img src="{% static 'img/trairagem.jpg' %}" alt="república">
+            <br>
+            <br>
+            <h2>Fale um pouco sobre você e suas preferências para podermos te sugerir boas opções de moradia.</h2>
+            <p class="lead">Sugestões: bairros, faixas de preço (geral ou por quarto), casa, apartamento, república, dividir quarto, proximidade da universidade, garagem.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

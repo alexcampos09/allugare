@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} Cadastro de Imóvel {% endblock %}
+
+{% block style %}
+<style>
+
+.middle{
+    height: 30px;
+}
+
+#formulario{
+    min-height: 500px;
+}
+
+#description{
+    text-align: justify;
+}
+
+#description img{
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 50px;
+}
+
+@media (max-width: 500px) {
+    #description img{
+        height: 250px;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+}
+/*END MEDIA*/
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<section class="middle" id="top">
+</section>
+
+
+<div class="container" id="formulario">
+    <div class="row">
+        <div class="col-sm-7">
+            {% crispy form %}
+            <!-- <h1 class="text-align-center">{{ form_message }}</h1>
+            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Enviar" class="btn btn-primary"/>
+            </form> -->
+        </div>
+        <div class="col-sm-5" id="description">
+            <img src="{% static 'img/sala.jpeg' %}" alt="sala">
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2>Assim que terminar de preencher este formúlario, não esqueça de adicionar fotos ao seu anúncio.</h2>
+            <br>
+            <br>
+            <img src="{% static 'img/mesa_cadeiras.jpeg' %}" alt="mesa e cadeiras">
+            <br>
+            <br>
+            <h2>Se quiser fotos profissionais e filmagem do seu imóvel, <a href="{% url 'contato' %}">agende uma visita</a> com um dos nossos fotógrafos.</h2>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+    <!-- NOT WORKING -->
+    <script type="text/javascript">
+        $( "#date" ).datepicker();
+    </script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    .mensagem{
+        border: solid 2px;
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #aaa;
+    }
+
+    .container img{
+        height: 200px;
+        border-radius: 20px;
+    }
+
+    .perfil{
+        margin: 0 auto;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>{{ object }}</h1>
+                <p class="lead mensagem">{{ object.mensagem|linebreaksbr }}</p>
+            </div>
+
+            <div class="col-lg-5 pull-right perfil">
+                <br>
+                <h1>
+                    {% if object.user.profile.nome %}
+                        {{ object.user.profile.nome }}
+                    {% elif fb_name %}
+                        {{ fb_name }}
+                    {% else %}
+                        Usuári@: {{ object.user }}
+                    {% endif %}
+                </h1>
+                {% if object.user.profile.profilePic %}
+                    <img src="{{ object.user.profile.profilePic.url }}" alt="Profile Picture" class="img-responsive">
+                {% elif fb_picture %}
+                    <img src="{{ fb_picture }}" alt="Facebook Picture">
+                {% else %}
+                    <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                {% endif %}
+                {% if object.user.profile.universidade %}<h3>Universidade: {{ object.user.profile.universidade }}</h3>{% endif %}
+                {% if object.user.profile.curso %}<h3>Curso: {{ object.user.profile.curso }}</h3>{% endif %}
+                {% if object.user == user %}
+                    <a href="{{ object.get_absolute_url }}update" class="btn btn-primary">Editar</a>
+                    <a href="{{ object.get_absolute_url }}delete" class="btn btn-danger">Deletar</a>
+                {% else %}
+                    <a href="/profiles/{{ object.user }}/" class="btn btn-success">Ver Perfil</a>
+                    <!-- <a href="/profiles/{{object.user}}" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar mensagem</a> -->
+                {% endif %}
+            </div>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

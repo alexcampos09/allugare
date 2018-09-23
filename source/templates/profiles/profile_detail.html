@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
+<style>
+    img {
+        height: 200px;
+        border-radius: 50px;
+    }
+
+    .public-info, .private-info{
+        margin-top: 40px;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 public-info">
+            {% if user.profilePic %}
+                <img src="{{ user.profilePic.url }}" alt="Profile Picture">
+            {% elif fb_picture %}
+                <img src="{{ fb_picture }}" alt="Facebook Picture">
+            {% else %}
+                {% if user.user == request.user %}
+                    <a href="/profiles/{{ user.user }}/update" class="btn btn-success">Adicionar foto de perfil</a>
+                    <h2>Adicione informações ao seu perfil para tornar a comunicação com outros usuários mais efetiva.</h2>
+                {% else %}
+                    <h2>Usuári@ {{ user }} ainda está com o perfil incompleto, mas você pode enviar uma mensagem para conhecê-l@ melhor.</h2>
+                {% endif %}
+            {% endif %}
+
+            {% if user.nome %}
+                <h1>{{ user.nome }}</h1>
+            {% elif fb_name %}
+                <h1>{{ fb_name }}</h1>
+            {% else %}
+                <h1> Usuári@: {{ user }} </h1>
+            {% endif %}
+
+            {% if user.cidade %}<h3>Cidade: {{ user.cidade }}-{{ user.uf }}</h3>{% endif %}
+            {% if user.universidade %}<h3>Universidade: {{ user.universidade }}</h3>{% endif %}
+            {% if user.curso %}<h3>Curso: {{ user.curso }}</h3>{% endif %}
+            {% if user.bio %}<h3>Biografia: {{ user.bio|linebreaksbr }}</h3>{% endif %}
+        </div>
+
+        <div class="col-lg-6 private-info">
+            {% if user.user == request.user %}
+                <h1>Informações Privadas</h1>
+                <h3>E-mail: {{ object.email }}</h3>
+                {% if user.telefone %}<h3>Telefone: {{ user.telefone }}</h3>{% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% if user.user == request.user %}
+        <a href="/profiles/{{ user.user }}/update" class="btn btn-primary">Editar</a>
+    {% else %}
+        <!-- <a href="" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar mensagem</a> -->
+    {% endif %}
+</div>
+{% endblock %}

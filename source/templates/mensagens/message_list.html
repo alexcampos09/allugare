@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head_title %} Mensagens {% endblock %}
+
+{% block CSS_File %}
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+{% endblock %}
+
+{% block style %}
+<style>
+
+    h1{
+        margin-top: 50px;
+    }
+    #tabela{
+        font-family: 'Cuprum', sans-serif;
+        font-size: 1.2em;
+        text-align: left;
+    }
+
+    img{
+        width: 40%;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+
+<div class="container">
+
+    <h1>Estudantes em busca de moradia</h1>
+
+    <a href="{% url 'message_create' %}" class="btn btn-primary">Criar anúncio</a>
+    <br><br>
+    <img src="{% static 'img/tinta_vermelha.jpg' %}" alt="">
+
+    <table class="table table-hover" id="tabela">
+        <thead>
+            <th></th>
+            <th>Anúncio</th>
+            <th>Universidade</th>
+            <th>Curso</th>
+            <th>Data da postagem</th>
+        </thead>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.user.profile.universidade }}</td>
+                <td>{{ object.user.profile.curso }}</td>
+                <td>{{ object.timestamp }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if is_paginated %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li>
+            <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+        </li>
+    {% endif %}
+        <li class="">
+            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        </li>
+    {% if page_obj.has_next %}
+        <li>
+            <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+        </li>
+    {% endif %}
+    </ul>
+    {% else %}
+        <!-- <h3>Your File Exam</h3>
+        <p>File not yet available</p> -->
+    {% endif %}
+
+</div>
+{% endblock %}
