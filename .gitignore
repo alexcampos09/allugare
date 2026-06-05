@@ -102,3 +102,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Local dev runner artifacts
+source/db.sqlite3
+source/static-live/
+screenshots/

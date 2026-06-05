@@ -1,0 +1,12 @@
+# Local-dev runner for the legacy Django 1.11 / Python 3.6 app.
+# Usage:  docker compose up --build   then open http://localhost:8010
+services:
+  web:
+    build: .
+    platform: linux/amd64        # python:3.6 has no arm64 image; emulate on Apple Silicon
+    ports:
+      - "8010:8000"              # host 8010 -> container 8000 (8000 was busy locally)
+    volumes:
+      - ./source:/app/source     # live-mount code so edits don't require a rebuild
+    environment:
+      DJANGO_SETTINGS_MODULE: settings_dev
