@@ -70,12 +70,13 @@ tracked source. See `.env.example` for the full list (`DJANGO_SECRET_KEY`,
 local demo (`settings_dev`) needs none of them: it uses a throwaway dev key,
 the console email backend, and local-disk storage.
 
-> ⚠️ **History note:** this repo's *git history* still contains the original
-> 2017 secrets (a Django SECRET_KEY, AWS access keys, a Google Maps key, a
-> Facebook app secret) from before they were removed from the working tree.
-> Those keys must be treated as compromised and rotated/deactivated in their
-> respective consoles. Scrubbing them from history requires a `git filter-repo`
-> rewrite + force-push.
+> ⚠️ **History note:** the original 2017 secrets (a Django SECRET_KEY, AWS
+> access keys, a Google Maps key, a Facebook app secret) were scrubbed from git
+> history on 2026-06-06 via `git filter-repo` + force-push; the branch history
+> no longer contains them. **They must still be rotated/deactivated** in their
+> respective consoles — they were public for years, so they are compromised
+> regardless, and old object copies may linger in GitHub's storage (e.g. via
+> the merged PR's refs) until garbage-collected.
 
 ## Notes / cleanup TODO if productionizing
 
