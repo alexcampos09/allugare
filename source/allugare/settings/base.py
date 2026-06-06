@@ -197,8 +197,8 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_root")
 
-AWS_ACCESS_KEY_ID = "AKIAIRMGKN5UTHCW2ZAQ"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
 
 
 AWS_FILE_EXPIRE = 200

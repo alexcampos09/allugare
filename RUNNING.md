@@ -21,9 +21,8 @@ Everything lives behind a dedicated, self-contained settings module,
 `source/settings_dev.py` (`DJANGO_SETTINGS_MODULE=settings_dev`). The original
 `allugare/settings/` package is left untouched — note it cannot be imported
 as-is (its `__init__.py` eagerly imports `base`/`production`, which reference
-files missing from this repo: `allugare.aws.conf`, `allugare.utils` storage
-classes, and email secrets commented out in `passwords.py`). `settings_dev`
-sidesteps that chain entirely and:
+files missing from this repo: `allugare.aws.conf` and `allugare.utils` storage
+classes). `settings_dev` sidesteps that chain entirely and:
 
 | Concern  | Production            | Local dev (`settings_dev`)         |
 |----------|-----------------------|------------------------------------|
@@ -63,10 +62,22 @@ house/building placeholders.
 `dj-database-url` + `psycopg2`, set `DATABASE_URL`, and uncomment it. The full
 original production pins are in `source/requirements.txt`.
 
+## Secrets / configuration
+
+All secrets are read from environment variables — nothing is hardcoded in the
+tracked source. See `.env.example` for the full list (`DJANGO_SECRET_KEY`,
+`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, email + Google Maps keys). The
+local demo (`settings_dev`) needs none of them: it uses a throwaway dev key,
+the console email backend, and local-disk storage.
+
+> ⚠️ **History note:** this repo's *git history* still contains the original
+> 2017 secrets (a Django SECRET_KEY, AWS access keys, a Google Maps key, a
+> Facebook app secret) from before they were removed from the working tree.
+> Those keys must be treated as compromised and rotated/deactivated in their
+> respective consoles. Scrubbing them from history requires a `git filter-repo`
+> rewrite + force-push.
+
 ## Notes / cleanup TODO if productionizing
 
-- `source/allugare/settings/passwords.py` and `base.py` contain hardcoded
-  secrets (a Django SECRET_KEY and **AWS access keys**). Treat the AWS keys as
-  compromised — rotate/remove them; never reuse for a client.
 - The `allugare.aws.conf` / `allugare.utils` storage modules referenced by the
   original settings are missing and would need restoring for an S3 deploy.

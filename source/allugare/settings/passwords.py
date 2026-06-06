@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-SECRET_KEY = '8s%x8=o@ffb&jeo50gk@3)yhmu9oc)qoqs#hq8(xr%9hr585er'
+"""Secret values, sourced from the environment.
 
-# EMAIL_HOST_USER = 'arteallugare@gmail.com'
-# EMAIL_HOST_PASSWORD = 'e&yccNTt43qc_aUTTgYEJ#aH@rj7Yg6d5m=d@b5P'
+Never hardcode credentials here. Set these via environment variables (see
+``.env.example`` at the repo root). Empty fallbacks keep imports working in
+contexts where a given secret is not needed.
+"""
+
+import os
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")

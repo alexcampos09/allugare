@@ -212,10 +212,8 @@ from allugare.aws.conf import *
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # http://localhost:8000/accounts/facebook/login/callback/
-
-    # Facebook
-    # app id: 249421952180205
-    # app secret: 42ccdf90f5c6cc48d7232d18c11d0db7
+# Facebook OAuth credentials are configured via a SocialApp row in the admin,
+# not hardcoded here.
 
 
 SOCIALACCOUNT_PROVIDERS = \
