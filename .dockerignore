@@ -1,0 +1,6 @@
+.git
+**/__pycache__
+**/*.pyc
+source/db.sqlite3
+source/static-live
+*.md

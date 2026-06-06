@@ -1,3 +1,5 @@
+import os
+
 import requests
 from allauth.socialaccount.models import SocialAccount, SocialToken
 from django.core.urlresolvers import reverse_lazy
@@ -19,7 +21,7 @@ class ImovelDetail(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         address = (self.object.rua, self.object.numero, self.object.bairro, self.object.cep, self.object.cidade, self.object.uf)
-        api_key = "***REMOVED***"
+        api_key = os.environ.get("GOOGLE_MAPS_API_KEY", "")
         api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
         api_response_dict = api_response.json()
 
